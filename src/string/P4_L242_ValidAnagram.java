@@ -6,37 +6,22 @@ import java.util.*;
 //TimeComplexity: O(n)
 public class P4_L242_ValidAnagram {
 
-	public static boolean isAnagram(String str1, String str2) {
-
-		if (str1.length() != str2.length()) {
-			return false;
-		}
-
-		Map<Character, Integer> countMap = new HashMap<>();
-		
-//		str1.chars().forEach(c->{
-//			countMap.put((char)c, countMap.getOrDefault(c, 0) + 1);
-//		});
-
-		for (char c : str1.toCharArray()) {
-			countMap.put(c, countMap.getOrDefault(c, 0) + 1);
-		}
-		
-		
-
-		for (char c : str2.toCharArray()) {
-			if (!countMap.containsKey(c)) {
-				return false;
-			}
-
-			countMap.put(c, countMap.getOrDefault(c, 0) - 1);
-			if (countMap.get(c) == 0) {
-				countMap.remove(c);
-			}
-		}
-
-		return countMap.isEmpty();
-	}
+public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        int[] charCount = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            charCount[s.charAt(i) - 'a']++;
+            charCount[t.charAt(i) - 'a']--;
+        }
+        for (int count : charCount) {
+            if (count != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 	
 	public static void main(String[] args) {
                 
