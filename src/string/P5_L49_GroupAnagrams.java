@@ -6,26 +6,33 @@ package string;
 import java.util.*;
 public class P5_L49_GroupAnagrams {
 	
-	public static List<List<String>> groupAnagrams(String strArray[]){
-		if(strArray==null||strArray.length==0) {
-			return new ArrayList<>();
-		}
-		
-		Map<String, List<String>> groupMap=new HashMap<>();
-		
-		for(String str:strArray) {
-			char ch[]=str.toCharArray();
-			Arrays.sort(ch);
-			String strVal=new String(ch);
-			if(!groupMap.containsKey(strVal)) {
-				groupMap.put(strVal, new ArrayList<>());
-			}
-			groupMap.get(strVal).add(str);
-		}
-		
-		return new ArrayList<>(groupMap.values());
-	}
-	
+public List<List<String>> groupAnagrams(String[] strs) {
+        // Create a HashMap to store the groups of anagrams
+        Map<String, List<String>> anagramMap = new HashMap<>();
+
+        // Iterate through each string in the input array
+        for (String s : strs) {
+            // Convert the string to a character array and sort it
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+            String sorted = new String(chars);
+
+            // Check if the key already exists
+            if (anagramMap.containsKey(sorted)) {
+                // If it exists, add the string to the existing list
+                anagramMap.get(sorted).add(s);
+            } else {
+                // If it does not exist, create a new list, add the string to it, and put it in the map
+                List<String> list = new ArrayList<>();
+                list.add(s);
+                anagramMap.put(sorted, list);
+            }
+        }
+
+        // Return all values in the hashmap as a list of lists
+        return new ArrayList<>(anagramMap.values());
+    }
+
 	public static void main(String[] args) {
         
         String[] strs1 = {"eat", "tea", "tan", "ate", "nat", "bat"};
