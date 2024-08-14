@@ -14,14 +14,14 @@ public class P1_L3_LongestSubstringWithoutDuplicate {
 		HashSet<Character> setValues=new HashSet<>();
 		
 		while(right<size) {
-			if(!setValues.contains(str.charAt(right))) {
-				setValues.add(str.charAt(right));
-				right++;
-				longest=Math.max(longest, (right-left));
-			}else {
-				setValues.remove(str.charAt(left));
-				left++;
-			}
+			if (setValues.contains(str.charAt(right))) {
+    setValues.remove(str.charAt(left));
+    left++;
+} else {
+    setValues.add(str.charAt(right));
+    right++;
+    longest = Math.max(longest, (right - left));
+}
 			
 		}
 		
